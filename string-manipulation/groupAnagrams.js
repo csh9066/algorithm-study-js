@@ -11,8 +11,8 @@
 function groupAnagrams(strs = []) {
 	const hashAnagrams = strs.reduce((anagrams, word) => {
 		//단어를 배열로 바꾼다음 정렬 한다음 문자열 키값으로 변환
-		const key = Array.from(cur).sort().join('');
-		if (!acc[key]) {
+		const key = Array.from(word).sort().join('');
+		if (!anagrams[key]) {
 			anagrams[key] = [word];
 		} else {
 			anagrams[key].push(word);
@@ -28,4 +28,4 @@ function groupAnagrams(strs = []) {
 	return arrayAnagrams;
 }
 
-groupAnagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat']);
+console.log(groupAnagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat']));
