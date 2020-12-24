@@ -6,25 +6,17 @@ function mostCommonWord(paragraph, banned = []) {
   const words = paragraph
     .toLocaleLowerCase()
     .split(/\W+/)
-    .filter((word) => !banned.includes(word))
-    .reduce((acc, cur) => {
-      if (!acc[cur]) {
-        acc[cur] = 1;
-      } else {
-        acc[cur]++;
-      }
-      return acc;
-    }, {});
+    .filter((word) => !banned.includes(word));
 
-  let maxCount = 0;
-  let result;
+  const wordMap = {};
 
-  for (const word in words) {
-    if (maxCount < words[word]) {
-      maxCount = words[word];
-      result = word;
+  for (word of words) {
+    if (word in wordMap) {
+      wordMap[word]++;
+    } else {
+      wordMap[word] = 1;
     }
   }
 
-  return result;
+  return Object.entries(wordMap).sort((a, b) => b[1] - a[1])[0][0];
 }
