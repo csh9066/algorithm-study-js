@@ -9,23 +9,19 @@
 // ]
 
 function groupAnagrams(strs = []) {
-	const hashAnagrams = strs.reduce((anagrams, word) => {
-		//단어를 배열로 바꾼다음 정렬 한다음 문자열 키값으로 변환
-		const key = Array.from(word).sort().join('');
-		if (!anagrams[key]) {
-			anagrams[key] = [word];
-		} else {
-			anagrams[key].push(word);
-		}
-		return anagrams;
-	}, {});
+  const hahshAnangram = {};
 
-	const arrayAnagrams = [];
+  for (str of strs) {
+    const sortedStr = str.split('').sort().join('');
 
-	for (anaGram in hashAnagrams) {
-		arrayAnagrams.push(hashAnagrams[anaGram]);
-	}
-	return arrayAnagrams;
+    if (sortedStr in hahshAnangram) {
+      hahshAnangram[sortedStr].push(str);
+    } else {
+      hahshAnangram[sortedStr] = [str];
+    }
+  }
+
+  return Object.values(hahshAnangram);
 }
 
 console.log(groupAnagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat']));
